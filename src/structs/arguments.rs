@@ -3,12 +3,12 @@ use clap::Parser;
 
 #[derive(Parser, Debug)]
 pub struct AppArguments {
-    #[arg(index = 1)]
+    #[arg(long)]
     pub(crate) limit: usize,
-    #[arg(index = 2)]
+    #[arg(long)]
     pub(crate) order_by: String,
-    #[arg(index = 3)]
+    #[arg(long)]
     pub(crate) interval: u64,
-    #[arg(index = 4)]
+    #[arg(long)]
     pub(crate) filter_by: Option<String>,
 }
