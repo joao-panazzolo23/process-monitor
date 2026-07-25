@@ -1,0 +1,9 @@
+import { ColumnSpec } from "../structs/column_spec.slint";
+
+export global ColumnConfig {
+    in-out property <[ColumnSpec]> columns: [
+        { title: "PID", width: 64px, alignment: TextHorizontalAlignment.right },
+        { title: "CPU %", width: 72px, alignment: TextHorizontalAlignment.right },
+        { title: "RAM (MB)", width: 96px, alignment: TextHorizontalAlignment.right },
+    ];
+}

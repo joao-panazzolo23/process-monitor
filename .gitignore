@@ -22,3 +22,5 @@
 # Sistema
 .DS_Store
 Thumbs.db
+
+target/

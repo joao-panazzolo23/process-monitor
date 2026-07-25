@@ -1,0 +1,14 @@
+import { Palette } from "../global/theme.g.slint";
+export component RowCell inherits Rectangle {
+    in property <string> text;
+    in property <TextHorizontalAlignment> alignment: left;
+
+    Text {
+        text: root.text;
+        color: Palette.text;
+        horizontal-alignment: root.alignment;
+        vertical-alignment: center;
+        width: 100%;
+        overflow: elide;
+    }
+}

@@ -1,0 +1,18 @@
+import { StandardTableView } from "std-widgets.slint";
+import { ProcessTable } from "components/process_table.slint";
+import { Process } from "structs/process.slint";
+
+
+export component AppWindow inherits Window {
+    in property <[Process]> processes;
+
+    preferred-width: 800px;
+    preferred-height: 600px;
+    title: "Slint Process Monitor";
+
+    ProcessTable {
+        width: parent.width;
+        height: parent.height;
+        processes: processes;
+    }
+}

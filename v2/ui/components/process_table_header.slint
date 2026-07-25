@@ -1,0 +1,54 @@
+import { Metrics, Palette } from "../global/theme.g.slint";
+import { ColumnSpec } from "../structs/column_spec.slint";
+import { ColumnConfig } from "../global/column_config.slint";
+
+component HeaderCell inherits Rectangle {
+    in property <string> title;
+    in property <TextHorizontalAlignment> alignment: left;
+    callback clicked;
+
+    TouchArea {
+        clicked => { root.clicked(); }
+    }
+
+    Text {
+        text: root.title;
+        color: Palette.text;
+        horizontal-alignment: root.alignment;
+        vertical-alignment: center;
+        font-weight: 600;
+        width: 100%;
+    }
+}
+
+export component ProcessTableHeader inherits Rectangle {
+    height: Metrics.header-height;
+    background: Palette.header-bg;
+
+    // índice: -1 = coluna "Nome", 0..n = ColumnConfig.columns[índice]
+    callback sort-requested(int);
+
+    HorizontalLayout {
+        padding: Metrics.cell-padding;
+        spacing: Metrics.cell-spacing;
+
+        HeaderCell {
+            title: "Nome";
+            horizontal-stretch: 1;
+            clicked => { root.sort-requested(-1); }
+        }
+
+        for column[index] in ColumnConfig.columns: HeaderCell {
+            title: column.title;
+            alignment: column.alignment;
+            width: column.width;
+            clicked => { root.sort-requested(index); }
+        }
+    }
+
+    Rectangle {
+        y: parent.height - 1px;
+        height: 1px;
+        background: Palette.border;
+    }
+}

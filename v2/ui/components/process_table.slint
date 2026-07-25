@@ -1,0 +1,25 @@
+import { ScrollView } from "std-widgets.slint";
+import { Process } from "../structs/process.slint";
+import { ProcessRow } from "process_row.slint";
+import { ProcessTableHeader } from "process_table_header.slint";
+
+export component ProcessTable inherits Rectangle {
+    in property <[Process]> processes;
+
+    VerticalLayout {
+        ProcessTableHeader { }
+
+        ScrollView {
+            vertical-stretch: 1;
+            min-height: 0px;
+
+            VerticalLayout {
+                spacing: 0px;
+
+                for process in root.processes: ProcessRow {
+                    process: process;
+                }
+            }
+        }
+    }
+}

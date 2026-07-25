@@ -1,0 +1,48 @@
+import { Process } from "../structs/process.slint";
+import { RowCell } from "row-cell.slint";
+import { Metrics, Palette } from "../global/theme.g.slint";
+import { ColumnConfig } from "../global/column_config.slint";
+
+export component ProcessRow inherits Rectangle {
+    in property <Process> process;
+    in property <bool> selected: false;
+
+    callback clicked;
+    callback right-clicked(length, length);
+
+    height: Metrics.row-height;
+    background: root.selected
+        ? Palette.row-selected
+        : (touch-area.has-hover ? Palette.row-hover : transparent);
+
+    property <[string]> values: [
+        process.pid + "",
+        (Math.round(process.cpu-usage * 10) / 10) + "%",
+        Math.round(process.memory-usage) + " MB",
+    ];
+
+    touch-area := TouchArea {
+        clicked => { root.clicked(); }
+        pointer-event(event) => {
+            if (event.kind == PointerEventKind.down && event.button == PointerEventButton.right) {
+                root.right-clicked(touch-area.mouse-x, touch-area.mouse-y);
+            }
+        }
+    }
+
+    HorizontalLayout {
+        padding: Metrics.cell-padding;
+        spacing: Metrics.cell-spacing;
+
+        RowCell {
+            text: root.process.name;
+            horizontal-stretch: 1;
+        }
+
+        for column[index] in ColumnConfig.columns: RowCell {
+            text: root.values[index];
+            alignment: column.alignment;
+            width: column.width;
+        }
+    }
+}
