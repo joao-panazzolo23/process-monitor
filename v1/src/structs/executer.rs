@@ -23,28 +23,6 @@ pub fn execute(mut monitor: Monitor, args: &AppArguments, order_by: OrderBy) {
         //|a, b| is a closure. Equivalent to writing a function that returns the type evaluated.
         // When using Sort By, the signature is &mut self, mut compare: F
         // partial_cmp orders
-        match order_by {
-            OrderBy::Cpu => processes.sort_by(|a, b| {
-                b.cpu_usage
-                    .partial_cmp(&a.cpu_usage)
-                    .unwrap_or(std::cmp::Ordering::Equal)
-            }),
-            OrderBy::Memory => processes.sort_by(|a, b| {
-                b.memory_usage
-                    .partial_cmp(&a.memory_usage)
-                    .unwrap_or(std::cmp::Ordering::Equal)
-            }),
-            OrderBy::Name => processes.sort_by(|a, b| {
-                b.name
-                    .partial_cmp(&a.name)
-                    .unwrap_or(std::cmp::Ordering::Equal)
-            }),
-            OrderBy::Pid => processes.sort_by(|a, b| {
-                b.pid
-                    .partial_cmp(&a.pid)
-                    .unwrap_or(std::cmp::Ordering::Equal)
-            }),
-        }
 
         formatter::show_processes(&processes, args.limit);
 
