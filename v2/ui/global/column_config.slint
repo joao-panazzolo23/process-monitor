@@ -1,9 +1,25 @@
 import { ColumnSpec } from "../structs/column_spec.slint";
+import { OrderByUi } from "../enums/order_by.slint";
 
 export global ColumnConfig {
     in-out property <[ColumnSpec]> columns: [
-        { title: "PID", width: 64px, alignment: TextHorizontalAlignment.right },
-        { title: "CPU %", width: 72px, alignment: TextHorizontalAlignment.right },
-        { title: "RAM (MB)", width: 96px, alignment: TextHorizontalAlignment.right },
+        {
+            title: "PID",
+            width: 64px,
+            alignment: TextHorizontalAlignment.right,
+            order_by: OrderByUi.Pid
+        },
+        {
+            title: "CPU %",
+            width: 72px,
+            alignment: TextHorizontalAlignment.right,
+            order_by: OrderByUi.Cpu
+        },
+        {
+            title: "RAM (MB)",
+            width: 96px,
+            alignment: TextHorizontalAlignment.right,
+            order_by:OrderByUi.Memory
+        },
     ];
 }

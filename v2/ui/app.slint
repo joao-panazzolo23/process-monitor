@@ -1,18 +1,25 @@
 import { StandardTableView } from "std-widgets.slint";
 import { ProcessTable } from "components/process_table.slint";
 import { Process } from "structs/process.slint";
-
+import { OrderByUi } from "enums/order_by.slint";
 
 export component AppWindow inherits Window {
     in property <[Process]> processes;
+    callback sort-requested(OrderByUi);
 
+    //Todo: global configuration && dynamic UI
     preferred-width: 800px;
     preferred-height: 600px;
     title: "Slint Process Monitor";
+    background: Colors.gray;
+    default-font-family: "JetBrains Mono";
+    default-font-size: 16px;
+    default-font-weight: 650;
 
     ProcessTable {
         width: parent.width;
         height: parent.height;
         processes: processes;
+        sort-requested(OrderBy) => sort-requested(OrderBy);
     }
 }

@@ -2,12 +2,17 @@ import { ScrollView } from "std-widgets.slint";
 import { Process } from "../structs/process.slint";
 import { ProcessRow } from "process_row.slint";
 import { ProcessTableHeader } from "process_table_header.slint";
+import { OrderByUi } from "../enums/order_by.slint";
 
 export component ProcessTable inherits Rectangle {
     in property <[Process]> processes;
+    callback sort-requested(OrderByUi);
 
     VerticalLayout {
-        ProcessTableHeader { }
+
+        ProcessTableHeader {
+            sort-requested(order_by) => sort-requested(order_by);
+        }
 
         ScrollView {
             vertical-stretch: 1;

@@ -31,6 +31,7 @@ impl Monitor {
             cpus: self.system.cpus().len() as f32,
         }
     }
+    //todo: order by
     pub fn list_processes(&self) -> Vec<ProcessInfo> {
         let processes: &HashMap<Pid, Process> = self.system.processes();
 

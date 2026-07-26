@@ -1,22 +1,21 @@
 import { Palette } from "../global/theme.g.slint";
-export component RowCell inherits Rectangle {
-    in property <string> text;
+export component HeaderCell inherits Rectangle {
+    in property <string> title;
     in property <TextHorizontalAlignment> alignment: left;
-    callback clicked();
+    callback clicked;
 
+    border-radius: 4px;
     TouchArea {
-        clicked => {
-            root.clicked();
-        }
-
+        clicked => { root.clicked(); }
         mouse-cursor: pointer;
     }
 
     Text {
-        text: root.text;
+        text: root.title;
         color: Palette.text;
         horizontal-alignment: root.alignment;
         vertical-alignment: center;
+        font-weight: 600;
         width: 100%;
         overflow: elide;
     }
